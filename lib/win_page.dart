@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpuzzle/main.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({super.key});
@@ -15,7 +16,7 @@ class _ThirdPageState extends State<ThirdPage> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("images/winbg.jpg"),fit: BoxFit.cover)
+          image: DecorationImage(image: AssetImage("images/winbg.jpg"),fit: BoxFit.cover),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,13 +35,14 @@ class _ThirdPageState extends State<ThirdPage> {
             SizedBox(height: 30,),
 
             OutlinedButton(onPressed: () {
-
+              Navigator.pop(context);
             }, child: Text("Continue",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,fontFamily: "font-1",color: Colors.black),)),
 
             SizedBox(height: 10,),
 
             OutlinedButton(onPressed: () {
-
+              Navigator.pop(context);
+              Navigator.pop(context);
             }, child: Text("Main menu",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,fontFamily: "font-1",color: Colors.black),))
           ],
         ),

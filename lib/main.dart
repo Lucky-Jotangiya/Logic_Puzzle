@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpuzzle/continue_page.dart';
 import 'package:mathpuzzle/globalfile.dart';
+import 'package:mathpuzzle/playpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main(){
@@ -58,8 +59,11 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(onPressed: () {
+
+                      int passInt = Global.pref.getInt('level')??0;
+
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return SecondPage(level!);
+                        return SecondPage(passInt);
                       },));
                     }, child: Text("Continue",style: TextStyle(fontSize: 30,color: Colors.white,fontFamily: "font-1",fontWeight: FontWeight.bold),)),
 
@@ -76,6 +80,28 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 20,),
 
                     TextButton(onPressed: () {
+
+                      showDialog(context: context, builder: (context) {
+                        return SimpleDialog(
+                          children: [
+
+                            Center(child: Text("Congratulations",style: TextStyle(fontSize: 20,color: Colors.deepPurple,fontWeight: FontWeight.bold),)),
+
+                            SizedBox(height: 30,),
+
+                            Container(
+                              height: 200,
+                              width: 200,
+                              child: Image.asset("images/monkey.png"),
+                            ),
+
+                            SizedBox(height: 30,),
+
+                            Center(child: Text("you are PRO user",style: TextStyle(fontSize: 20,color: Colors.deepPurple,fontWeight: FontWeight.bold),)),
+
+                          ],
+                        );
+                      },);
 
                     }, child: Text("Buy Pro",style: TextStyle(fontSize: 30,color: Colors.white,fontFamily: "font-1",fontWeight: FontWeight.bold),)),
                   ],

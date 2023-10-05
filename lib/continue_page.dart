@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mathpuzzle/globalfile.dart';
-import 'package:mathpuzzle/main.dart';
 import 'package:mathpuzzle/win_page.dart';
 
 class SecondPage extends StatefulWidget {
@@ -147,7 +146,7 @@ class _SecondPageState extends State<SecondPage> {
                             String levelStatus = Global.statusList[widget.level];
                             if(levelStatus == "clear"){
                               setState(() {
-                                display="";
+                                display = "";
                                 widget.level++;
                               });
                               Global.pref.setInt('level', widget.level);
@@ -158,6 +157,11 @@ class _SecondPageState extends State<SecondPage> {
                             else if(levelStatus == "skip"){
                               Global.statusList[widget.level] = "clear";
                               Global.pref.setString('status${widget.level}', 'clear');
+                              setState(() {
+                                display = "";
+                                widget.level++;
+                              });
+                              Global.pref.setInt('level', widget.level);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                                   return ThirdPage();
                                 },));
@@ -222,88 +226,6 @@ class _SecondPageState extends State<SecondPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-
-class PlayPage extends StatefulWidget {
-  const PlayPage({super.key});
-
-  @override
-  State<PlayPage> createState() => _PlayPageState();
-}
-
-class _PlayPageState extends State<PlayPage> {
-
-  List page1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-  List page2 = [21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
-
-  bool clear = false;
-  bool lock = true;
-  bool skip = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Center(child: SafeArea(child: Text("Select Level",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),))),
-          
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: PageView(
-                children: [
-                  GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4), itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          if(page1[index] == 1){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return SecondPage(0);
-                            },));
-                          }
-                          else if(page1[index] == 2){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return SecondPage(1);
-                            },));
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(21),
-                          ),
-                          child: lock ? Center(child: Image.asset("name"),) : Center(child: Text("${page1[index]}",style: TextStyle(fontSize: 15,color: Colors.white),)),
-                        ),
-                      ),
-                    );
-                  },
-                    itemCount: page1.length,
-                  ),
-
-                  GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4), itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(21),
-                        ),
-                        child: Center(child: Text("${page2[index]}",style: TextStyle(fontSize: 16,color: Colors.white),)),
-                      ),
-                    );
-                  },
-                    itemCount: page2.length,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,4 +1,4 @@
-# mathpuzzle
+# Logic_Puzzle
 
 A new Flutter project.
 
